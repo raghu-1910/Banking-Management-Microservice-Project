@@ -1,1 +1,21 @@
-
+server:
+  port: 8089
+ 
+spring:
+  application:
+    name: API-GATEWAY-SERVICE
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: false
+      routes:
+        - id: CUSTOMER-SERVICE
+          uri: http://localhost:8081/customers
+          predicates:
+            - Path=/customers/**
+ 
+        - id: ACCOUNT-SERVICE
+          uri: http://localhost:8085/accounts
+          predicates:
+            - Path=/accounts/**
